@@ -5,12 +5,19 @@
 header{
     width: 100%;
     height: 112.5px;
-    background-color: rgb(137, 162, 48);
+    overflow: hidden;
+    border-bottom: 2px solid rgb(117, 170, 100);
+    transition: height 0.4s;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: white;
+    z-index: 999;
 }
 
 .header-wrap{
     width: 100%;
-    height: 110px;
+    height: 111px;
     padding-top: 15px;
     background-color: white;
 }
@@ -62,11 +69,10 @@ header{
 
 .header-bottom{
     width: 100%;
-    height: 75px;
+    height: 64px;
     display: flex;
     justify-content: space-between;
 }
-
 
 nav{
     width: 700px;
@@ -74,58 +80,91 @@ nav{
 }
 
 .main-menu{
-    margin-top: 6px;
+    padding-top: 6px;
     width: 100%;
-    height: 60px;
+    height: 57px;
     display: flex;
     justify-content: space-between;
 }
 
 .main-menu > li{
     width: 138px;
-    height: 22.5px;
+    height: 60px;
+    transition: ease-in-out 0.1s;
+    position: relative;
+}
+
+.main-menu > li:nth-child(2){
+    position: relative;
+}
+
+.main-menu > li:hover{
+    border-bottom: 7px solid rgb(117, 170, 100);
+}
+
+.main-menu > li > a{
+    display: block;
+    text-align: center;
 }
 
 .main-menu-btn{
     display: block;
     width: 100%;
     padding: 10px 33px 27px;
-    font-size: 17px;
+    font-size: 18px;
     font-weight: 600;
+}
+
+.main-menu > li:hover .menu-wrap{
+    display: block;
+}
+
+.main-menu > li:nth-child(1):hover .menu-wrap{
+    position: absolute;
+    left: -80px;
+}
+
+.main-menu > li:nth-child(2):hover .menu-wrap{
+    position: absolute;
+    left: -220.5px;
+}
+
+.main-menu > li:nth-child(3):hover .menu-wrap{
+    position: absolute;
+    left: -361px;
+}
+
+.main-menu > li:nth-child(4):hover .menu-wrap{
+    position: absolute;
+    left: -501.5px;
+}
+
+.main-menu > li:nth-child(5):hover .menu-wrap{
+    position: absolute;
+    left: -641.5px;
 }
 
 .menu-wrap{
     width: 100%;
-    height: 368px;
-    position: absolute;
-    left: 0;
-    top: 111.5px;
-    z-index: 99;
+    height: 400px;
     font-size: 16px;
     text-align: left;
-}
+    display: none;
 
-.menu-wrap > li{
-    width: 100%;
-    height: 314px;
-    background-color: white;
 }
 
 .submenu{
-    margin: 30px 138px 0px 138px;
-    padding-left: 200px;
+    position: absolute;
+    top: 0;
+    padding-top: 30px;
 }
 
 .submenu > li{
     width: 1064px;
-    height: 286px;
+    height: 336px;
     padding: 0 15px;
     display: flex;
-}
-
-.submenu-title{
-    font-weight: 600;
-    padding: 10px 0px;
+    margin: 0 auto;
 }
 
 .submenu-part{
@@ -136,24 +175,56 @@ nav{
     background-color: white;
 }
 
+.submenu-part li{
+    padding: 7px 0px;
+    color: rgb(76, 76, 76);
+}
+
+.submenu-part .submenu-title{
+    font-weight: 900;
+    padding: 10px 0px;
+}
+
+.submenu-part li a:hover{
+    color: rgb(117, 170, 100);
+}
+
+
+
 .side-menu{
     padding-left: 20px;
     width: 410px;
     height: 273px;
     display: flex;
     border-left: 1px solid rgba(0, 0, 0, 0.1);
-    justify-content: space-between;
 }
 
+.side-menu li:first-child{
+    margin-right: 20px;
+}
 
+.side-menu-detail-btn{
+    display: block;
+    padding-top: 20px;
+    font-size: 14px;
+}
 
+.side-link{
+    width: 184px;
+    height: 190px;
+}
 
-
-
-
-
-
-
+.side-link li{
+    width: 182px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgb(76, 76, 76);
+    margin-bottom: 20px;
+    font-weight: 400;
+    cursor: pointer;
+}
 
 .header-side{
     width: 237px;
@@ -174,4 +245,10 @@ nav{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+section{
+    width: 100%;
+    height: 2000px;
+    background-color: antiquewhite;
 }

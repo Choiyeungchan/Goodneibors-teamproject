@@ -1,10 +1,169 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+/* 메인이미지 슬라이드 */
+#wrapper{
+    width: 100%;
+}
 
-</body>
-</html>
+#container{
+    width: 100%;
+    height: 600px;
+    position: relative;
+    overflow: hidden;
+    left: 0;
+}
+
+.slider-container{
+    width: 100%;
+    height: 600px;
+    position: absolute;
+    left: 0;
+}
+
+.slider-container.animated{
+    transition: left 0.3s ease-in;
+}
+
+.slide{
+    position: absolute;
+    width: 100%;
+    height: 600px;
+}
+
+.slide img{
+    width: 100%;
+    height: 600px;
+}
+
+.prev{
+    display: block;
+    z-index: 99;
+    width: 65px;
+    position: absolute;
+    top: 51%;
+}
+
+.prev img{
+    width: 100%;
+}
+
+.next{
+    display: block;
+    z-index: 99;
+    width: 65px;
+    position: absolute;
+    top: 51%;
+    right: 0.3%;
+}
+
+.next img{
+    width: 100%;
+}
+
+.prev.disabled, .next.disabled{
+    display: none;
+}
+
+
+/* 메인 스토리 캐스트 */
+#main-storycast{
+    margin: 0 auto;
+    width: 1348px;
+    height: 874.5px;
+    padding: 80px 0px;
+}
+
+.storycast-contents{
+    width: 100%;
+    height: 874.5px;
+    background-color: antiquewhite;
+}
+
+.title_box{
+    width: 100%;
+    height: 66px;
+}
+
+.title{
+    width: 100%;
+    height: 36px;
+    margin-bottom: 11px;
+    font-size: 32px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.short-txt{
+    width: 100%;
+    height: 19px;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+}
+
+.more_btn{
+    display: block;
+    width: 56px;
+    height: 56px;
+    border: 1px solid rgb(76, 76, 76);
+    position: relative;
+    top: 34px;
+    left: 1290px;
+}
+
+.more_btn img{
+    width: 80%;
+    height: 80%;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.tab_area{
+    width: 100%;
+    height: 41px;
+    margin-bottom: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.tab_area li{
+    width: 233px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.tab_area li a{
+    width: 232px;
+    height: 30px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgb(134, 159, 48);
+    display: block;
+    font-size: 20px;
+    color: rgb(85, 85, 85);
+    font-weight: 600;
+    text-align: center;
+    text-decoration-color: rgb(134, 159, 48);
+}
+
+.tab{
+    width: 100%;
+    height: 642.5px;
+    background-color: aqua;
+}
+
+.tab1{
+    width: 100%;
+    height: 642.5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.col1{
+    width: 655px;
+    height: 597px;
+}
+
+.row1{
+    width: 100%;
+    height: 597px;
+}
