@@ -1,30 +1,6 @@
-const btnlogin = document.querySelector(".btn-login");
+const registerForwardButton = document.querySelector(".btn-member-join");
 
-btnlogin.onclick = () => {
-     location.href = "/main"
+registerForwardButton.onclick = () => {
+  location.href = "/account/register";
 }
 
-class KakaoLogin {
-
-     getkakao () {
-          $.ajax({
-               url: '/login/getKakaoAuthUrl',
-               type: 'get',
-               async: false,
-               dataType: 'text',
-               success: function (res) {
-                    location.href = res
-               }
-          });
-          
-     }
-
-     $(document).ready(function() {
-          let kakaoInfo = '${kakaoInfo}';
-
-          if(kakaoInfo != "") {
-               let data = JSON.parse(kakaoInfo);
-          }
-     });
-
-}

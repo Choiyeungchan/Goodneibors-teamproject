@@ -8,13 +8,13 @@ spring:
   security:
     user:
       name: test@naver.com
-      password: 1q2w3e4r!
+      password: 1q2w3e4r
 
   datasource:
     driver-class-name: org.mariadb.jdbc.Driver
-    url: jdbc:mariadb://shc-db.cgogdkhaohzu.ap-northeast-2.rds.amazonaws.com:3306/goodneighbors-1114
+    url: jdbc:mariadb://database-study.cvyhp6qkgzwg.ap-northeast-2.rds.amazonaws.com:3306/ikmyeongshop
     username: admin
-    password: 1q2w3e4r
+    password: 1q2w3e4r!
 
 mybatis:
   mapper-locations:
