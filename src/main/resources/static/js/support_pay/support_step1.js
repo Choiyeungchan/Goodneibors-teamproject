@@ -1,114 +1,60 @@
+const selected = document.querySelectorAll(".support-selects");
+const layer = document.querySelectorAll(".row2");
+
+selected.forEach((select,index) => {
+  select.onclick = () => {
+    layer[index].classList.toggle("invisible-area");
+  }
+});
+
+// function getCheckboxValue()  {
+//   // // 선택된 목록 가져오기
+//   // const query = 'input[name="regular-1"]:checked';
+//   // const selectedEls = 
+//   //     document.querySelectorAll(query);
+  
+//   // // 선택된 목록에서 value 찾기
+//   let result = '';
+//   // selectedEls.forEach((el) => {
+//   //   result = el.value + ' ';
+//   // });
+  
+//   // // 출력
+
+// }
 
 
-
-const selectedAll = document.querySelector(".surport-selects");
-const layer = document.querySelector(".row2");
-
-selectedAll.onclick = () => {
-    layer.classList.toggle("invisible-area");
-}
-
-
-
-class DonationApi {
-    static #instance = null;
-    static getInstance() {
-        if(this.#instance == null) {
-            this.#instance = new DonationApi();
-        }
-        return this.#instance;
-    }
-
-    getDonationData() {
-        let responseData = null;
-        const url = location.href;
-        const donaId = user.substring(url.lastIndexOf("/") + 1);
-
-        $.ajax({
-            async: false,
-            type: "get",
-            url: "/api/surport/" + category,
-            dataType: "json",
-            success: response => {
-                responseData = response.data;
-            },
-            error: error => {
-                console.log(error);
-            }
-        });
-
-        return responseData;
-    }
-}
-
-class DonationSelect {
+  class SelectValue {
 
     constructor() {
-        const responseData = DonationApi.getInstance().getDonationData();
-        this.addDonationListEvent(responseData);
-        this.addDonationDetail(responseData);
+      // this.getdonationvaule();
+      this.getCheckboxValue();
     }
 
-    addDonationListEvent(responseData) {
-        const donates = document.querySelector(".support-donate-table");
-        donates.innerHTML = '';
+    getdonationvaule() {
+      const regular1 = document.getElementById("regular-1-1").value;
+      const donatepay = document.querySelector(".donationPay");
 
-        responseData.forEach(donation => {
-            this.donaId.push(donation.donaId);
-            donates.innerHTML += `
-            <div class="donate-payInput regular-pay">
-                <div class="row1">
-                    <div class="check-box">
-                        <div class="check">
-                            <input type="checkbox" id="regular-1" class="surport-selects" value="1">
-                            <label for="regular-1">해외아동 1:1결연</label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row2 cf">
-                    <h6>후원아동 수</h6>
-                    <div class="donate-pay-radio">
-                        <div>
-                            <input type="radio" id="regular-1-1" name="regular-1" value="1" title="1명" checked>
-                            <label for="regular-1-1">1명</label>
-                        </div>
-                        <div>
-                            <input type="radio" id="regular-1-2" name="regular-1" value="2" title="2명" checked>
-                            <label for="regular-1-2">2명</label>
-                        </div>
-                        <div>
-                            <input type="radio" id="regular-1-3" name="regular-1" value="3" title="3명" checked>
-                            <label for="regular-1-3">3명</label>
-                        </div>
-                    </div>
-                    <div class="donate-pay-input input-box outline-box">
-                        <input type="number" class="maxLengthNext onlyPrice" name="regular-1" placeholder="아동 수 직접 입력" title="아동 수를 직접입력해주세요.">
-                        <label>명</label>
-                    </div>
-                    <div class="donate-pay-sinfo">
-                        후원금액(1명) 월 30,000원
-                    </div>
-                    <div class="donate-pay-total">
-                        총
-                        <span>30,000</span>
-                        원
-                    </div>
-                </div>
-            </div>
-            `;
-        });
+      document.getElementById('donationPay').innerText= Number(regular1) * Number(30000);
+      
     }
 
-    addDonationDetail() { 
-        const checkbox = document.getElementById("regular-1");
-        const donateList = document.querySelector(".row2");
-
-        const is_checked = checkbox.checked;
-
-        donateList.classList.toggle(".cf") = is_checked;
+    getCheckboxValue() {
+      let regular1 = document.getElementsByName("regular-1");
+      console.log(regular1[1].value);
+      const donatepay = document.querySelector(".donationPay");
+      for (let i = 0; i < regular1.length-1; i++) {
+        regular1[i].onclick = () => {
+          if(regular1[i].checked) {
+            document.getElementById('donationPay').innerText = Number(regular1[i].value * 30000);
+          }
+        }
+      }
+      
     }
-}
 
-window.onload = () => {
-    new DonationSelect();
-}
+  }
+
+  window.onload = () => {
+    new SelectValue();
+  }
