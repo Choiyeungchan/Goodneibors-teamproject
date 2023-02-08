@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,12 +22,12 @@
                 <article class="step-sec">
                     <div class="step-Sequence">
                         <div class="step-box">
-                            <div class="step active">
+                            <div class="step">
                                 <span>01</span>
                                 <label></label>
                                 <h6>후원사업 선택</h6>
                             </div>
-                            <div class="step">
+                            <div class="step active">
                                 <span>02</span>
                                 <label></label>
                                 <h6>후원회원정보</h6>
@@ -80,7 +80,7 @@
                                                 <th>후원회원명 *</th>
                                                 <td>
                                                     <div class="name-box">
-                                                        <div class="input-box">
+                                                        <div class="input-box" th:text="${user.name}">
                                                             <input type="text" name="memname1" id="memname1" title="이름을 입력해주세요." placeholder="이름을 입력해주세요">
                                                         </div>
                                                     </div>
@@ -101,8 +101,8 @@
                                                 <th>생년월일 *</th>
                                                 <td>
                                                     <div class="input-box birth-box outline-box">
-                                                        <input type="number" name="year" id="year" class="maxLengthNext" pattern="\d*" maxlength="4" max="4" placeholder="YYYY">
-                                                        <input type="number" name="month" id="month" class="maxLengthNext" pattern="\d*" maxlength="2" max="2" placeholder="MM">
+                                                        <input type="number" name="year" id="year" class="maxLengthNext" pattern="\d*" maxlength="4" max="4" placeholder="YYYY">/
+                                                        <input type="number" name="month" id="month" class="maxLengthNext" pattern="\d*" maxlength="2" max="2" placeholder="MM">/
                                                         <input type="number" name="day " id="day" class="maxLengthNext" pattern="\d*" maxlength="2" max="2" placeholder="DD">
                                                     </div>
                                                 </td>
@@ -137,8 +137,8 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                </div>        
-                                <a href="/pay/support_step2" class="btn btn-next btn-ga-send">다음단계</a>
+                                </div>
+                                <a href="payment/support_step3" class="btn btn-next btn-ga-send">다음단계</a>
                             </div>
                         </div>
                     </div>
@@ -156,5 +156,6 @@
         </main>
     </div>
     <script src="/static/js/support_pay/support_step2.js"></script>
+    
 </body>
 </html>
