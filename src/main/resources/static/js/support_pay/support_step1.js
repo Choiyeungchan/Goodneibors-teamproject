@@ -112,6 +112,7 @@ class ValueSum {
 
   getTotalValue() {
     let checkValue = document.getElementsByName("regular-");
+    let donatePay = document.getElementsByName("donationPay");
     let totalPrice = document.querySelector(".totalPay");
     let valueArray = new Array();
     let totalValue = 0;
@@ -126,9 +127,12 @@ class ValueSum {
         }
         totalPrice.innerHTML = Number(totalValue);
       }
+      console.log(donatePay[parseInt(i/3)])
     }
     console.log(valueArray)
   }
+
+
 
 }
 

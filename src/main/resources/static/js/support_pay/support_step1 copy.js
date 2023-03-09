@@ -74,7 +74,7 @@ class DonationSelect {
             </div>
             <div class="donate-pay-total">
               총
-              <span name="donationPay"></span>
+              <span name="donationPay" value="innerHTML" onchange=""></span>
               원
             </div>
           </div>
@@ -99,86 +99,54 @@ class ValueSum {
     this.getTotalValue();
   }
 
+
   getTotalValue() {
-    const donatePay = document.getElementsByName("donationPay");
-    const checkValue = document.getElementsByName("regular-");
-    const totalPrice = document.querySelector(".totalPay");
-    const inputValue = document.getElementsByName("regular-input-1");
-    const valueArray = new Array();
-    let totalValue = 0;
-
-    if(inputValue != null) {
-      for(let i = 0; i < checkValue.length; i++) {
-        inputValue[parseInt(i/3)].addEventListener('change', (event) => {
-          donatePay[parseInt(i/3)].innerHTML = Number(event.target.value) * Number(30000);
-          valueArray[parseInt(i/3)] = Number(event.target.value);
-          })
-      }
-    }
-    if(checkValue[i].checked) {
-      this.getCheckboxValue();
-    }
-  totalValue = Number(totalValue) + Number(valueArray[parseInt(i/3)] * 30000);
-    totalPrice.innerHTML = Number(totalValue);
-    console.log(valueArray)
-    console.log(totalValue);
-  }
-
-  getInputboxValue() {
-    const donatePay = document.getElementsByName("donationPay");
-    const inputValue = document.getElementsByName("regular-input-1");
-    
-    for(let i = 0; i < checkValue.lengh; i++) {
-      inputValue[parseInt(i/3)].addEventListener('change', (event) => {
-        donatePay[parseInt(i/3)].innerHTML = Number(event.target.value) * Number(30000);
-        valueArray[parseInt(i/3)] = Number(event.target.value);
-        })
-    }
-  }
-
-  getCheckboxValue() {
-    let donatePay = document.getElementsByName("donationPay");
     let checkValue = document.getElementsByName("regular-");
+    let donatePay = document.getElementsByName("donationPay");
+    let totalPrice = document.querySelector(".totalPay");
+    let valueArray = new Array();
     let totalValue = 0;
-    
-    
+
     for(let i = 0; i < checkValue.length; i++) {
       checkValue[i].onclick = () => {
         if(checkValue[i].checked) {
-          totalValue = 0;
-          this.getCheckboxValue.valueArray[parseInt(i/3)] = checkValue[i].value;
-          donatePay[parseInt(i/3)].innerText = Number(this.getCheckboxValue.valueArray[parseInt(i/3)] * 30000);
-          console.log(valueArray[parseInt(i/3)]);
+          donatePay[parseInt(i/3)].innerText = Number(checkValue[i].value * 30000);
+          valueArray[parseInt(i/3)] = Number(checkValue[i].value);
+
+          // totalValue = donatePay[parseInt(i/3)].innerHTML;
+        }
+        totalPrice.innerHTML = Number(totalValue);
+      }
+      console.log(donatePay[parseInt(i/3)].innerHTML);
+    }
+    console.log(valueArray);
+  }
+
+}
+
+class InputValue {
+  constructor() {
+
+    function inputSum() {
+      const inputValue = document.getElementsByName("regular-input-1");
+      let donatePay = document.getElementsByName("donationPay");
+      for(let i = 0; i < inputValue.length; i++){
+
+        if(inputValue[i]!=null){
+          donatePay[i] = Number(inputValue[i].value * 30000);
         }
       }
     }
-    console.log(this.getCheckboxValue.valueArray)
   }
-  
+  addInputSumEvetn() {
+    document.getElementsByName("regular-input-1").onchange = () => {
+      for(let i = 0; i < inputValue.length; i++) {
 
-// function totalchange() {
-//   let inputValue = document.getElementsByName("regular-input-1");
-//   let donationTotal = document.getElementsByName("donationPay");
-//   let paytotal = 0;
-//   const donaTotalPay = document.querySelector(".totalPay");
-//   for (let i = 0; i < donationTotal.length; i++){
-//     donationTotal[i].innerHTML = inputValue[i].value * Number(30000);
-//     paytotal = Number(paytotal) + (inputValue[i].value * Number(30000));
-//     donaTotalPay.innerHTML = paytotal;
-//   }
-// }
-
-  // getInputBoxValue() {
-  //   const donatePay = document.getElementsByName("donationPay");
-  //   const inputValue = document.getElementsByName("regular-input-1");
-
-  //   for(let i = 0; i < donatePay.length; i++) {
-      
-  //     donatePay[i].innerText = Number(inputValue[i]) * Number(30000);
-  //   }
-  // }
-
+      }
+    }
+  }
 }
+
 
 
 window.onload = () => {
