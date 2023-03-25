@@ -1,39 +1,29 @@
-const inputValue = document.getElementsByName("regular-input-1");
-const donatePay = document.getElementsByName("donationPay");
-  for(let i = 0; i < inputValue.lengh; i++) {
-    inputValue[i].addEventListener('input', event);
-  }
-
-  function event(e) {
-    donatePay.innerHTML = Number(e.target.value * 30000);
-  }
-
 class DonationApi {
-    static #instance = null;
-    static getInstance() {
-        if(this.#instance == null) {
-            this.#instance = new DonationApi();
-        }
-        return this.#instance;
-    }
+  static #instance = null;
+  static getInstance() {
+      if(this.#instance == null) {
+          this.#instance = new DonationApi();
+      }
+      return this.#instance;
+  }
 
-    getApi() {
-        let responseData = null;
+  getApi() {
+      let responseData = null;
 
-        $.ajax({
-            async: false,
-            type: "get",
-            url: "/api/support",
-            dataType: "json",
-            success: (response) => {
-                responseData = response.data;
-            },
-            error: (error) => {
-                console.log(error);
-            }
-        });
-        return responseData;
-    }
+      $.ajax({
+          async: false,
+          type: "get",
+          url: "/api/support",
+          dataType: "json",
+          success: (response) => {
+              responseData = response.data;
+          },
+          error: (error) => {
+              console.log(error);
+          }
+      });
+      return responseData;
+  }
 }
 
 class DonationSelect {
@@ -55,7 +45,7 @@ class DonationSelect {
           <div class="row1">
               <div class="check-box">
                   <div class="check">
-                      <input type="checkbox" id="regular-${category.categoryId}" class="support-selects" value="1">
+                      <input type="checkbox" id="regular-${category.categoryId}" class="support-selects" value="${category.categoryId}">
                       <label for="regular-${category.categoryId}">${category.categoryName}</label>
                   </div>
               </div>
@@ -76,7 +66,7 @@ class DonationSelect {
               </div>
             </div>
             <div class="donate-pay-input input-box outline-box">
-                <input type="number" id="regular-input"  class="maxLengthNext onlyPrice" name="regular-input-1" placeholder="아동 수 직접 입력" title="아동 수를 직접입력해주세요.">
+                <input type="number" id="regular-input" onchange class="maxLengthNext onlyPrice" name="regular-input-1" placeholder="아동 수 직접 입력" title="아동 수를 직접입력해주세요.">
                 <label>명</label>
             </div>
             <div class="donate-pay-sinfo">
@@ -84,7 +74,7 @@ class DonationSelect {
             </div>
             <div class="donate-pay-total">
               총
-              <span name="donationPay"></span>
+              <span class="donationPay" name="donationPay"></span>
               원
             </div>
           </div>
@@ -92,16 +82,19 @@ class DonationSelect {
         `;
 
     });
-    const selected = document.querySelectorAll(".support-selects");
-    const layer = document.querySelectorAll(".row2");
 
+    const selected = document.querySelectorAll(".support-selects");
+    
     selected.forEach((select,index) => {
-      select.onclick = () => {
-        layer[index].classList.toggle("invisible-area");
-      }
+      select.addEventListener("click", () => {
+        const layer = document.querySelectorAll(".row2")[index];
+        layer.classList.toggle("invisible-area");
+      });
     });
+
   }
-}
+
+  }
 
 class ValueSum {
 
@@ -109,35 +102,69 @@ class ValueSum {
     this.getTotalValue();
   }
 
-
   getTotalValue() {
-    let checkValue = document.getElementsByName("regular-");
-    let donatePay = document.getElementsByName("donationPay");
-    let totalPrice = document.querySelector(".totalPay");
-    let valueArray = new Array();
-    let totalValue = 0;
+    const selected = document.querySelectorAll(".support-selects");
+    const layers = document.querySelectorAll(".row2");
 
-    for(let i = 0; i < checkValue.length; i++) {
-      checkValue[i].onclick = () => {
-        if(checkValue[i].checked) {
-          donatePay[parseInt(i/3)].innerText = Number(checkValue[i].value * 30000);
-          valueArray[parseInt(i/3)] = Number(checkValue[i].value);
-
-          totalValue = Number(totalValue) + Number(valueArray[parseInt(i/3)] * 30000);
+    selected.forEach((select, index) => {
+      select.onclick = () => {
+        const layer = layers[index];
+        const checkbox = layer.querySelector(".support-selects");
+        const inputRadio = layer.querySelectorAll(".regular-1");
+        const inputNumber = layer.querySelector(".onlyPrice");
+        const donationPay = layer.querySelector(".donationPay");
+        let totalAmount = 0;
+        
+        // radio 버튼 처리
+        inputRadio.forEach((radio) => {
+          radio.onclick = () => {
+            if (radio.checked) {
+              totalAmount = parseInt(radio.value) * 30000;
+              donationPay.innerHTML = totalAmount;
+              this.updateTotalPay();
+            }
+          }
+        });
+    
+        // number input 처리
+        inputNumber.oninput = () => {
+          totalAmount = inputNumber.value * 30000;
+          donationPay.innerHTML = totalAmount;
+          this.updateTotalPay();
         }
-        totalPrice.innerHTML = Number(totalValue);
-      }
-      console.log(donatePay[parseInt(i/3)])
-    }
-    console.log(valueArray)
+    
+        // checkbox 처리 
+        checkbox.onclick = () => {
+          if (!checkbox.checked) {
+            totalAmount = 0;
+            donationPay.innerHTML = totalAmount;
+            this.updateTotalPay();
+          }
+        };
+      };
+    });
   }
 
+  updateDonationPay() {
+    const checkbox = document.querySelectorAll(".support-selects");
 
+    
+  }
+
+  updateTotalPay() {
+    let totalAmount = 0;
+    const donationPay = document.querySelectorAll(".donationPay");
+    donationPay.forEach((donationPay) => {
+      totalAmount += Number(donationPay.innerHTML);
+    });
+    document.querySelector(".totalPay").innerHTML = totalAmount;
+  }
 
 }
 
+
 window.onload = () => {
-  DonationApi.getInstance().getApi();
-  new DonationSelect();
-  new ValueSum();
+DonationApi.getInstance().getApi();
+new DonationSelect();
+new ValueSum();
 }
